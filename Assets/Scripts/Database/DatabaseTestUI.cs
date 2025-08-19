@@ -6,7 +6,9 @@ using Databases;
 
 namespace Databases.UI
 {
+    /// <summary>
     /// Simple UI controller for testing database functionality
+    /// </summary>
     public class DatabaseTestUI : MonoBehaviour
     {
         [Header("UI References")]
@@ -55,6 +57,7 @@ namespace Databases.UI
                 if (int.TryParse(scoreText, out int score))
                 {
                     // TODO: Use GameDataManager to add the high score
+                    GameDataManager.Instance.AddHighScore(playerName, score);
 
                     UpdateDisplay($"High score added: {playerName} - {score} points");
 
@@ -79,8 +82,7 @@ namespace Databases.UI
             try
             {
                 // TODO: Use GameDataManager to get high scores
-
-                var scores = new List<HighScore>(); // Placeholder - students will replace this
+                var scores = GameDataManager.Instance.GetTopHighScores();
 
                 if (scores.Count == 0)
                 {
@@ -109,6 +111,7 @@ namespace Databases.UI
             try
             {
                 // TODO: Use GameDataManager to clear all high scores
+                GameDataManager.Instance.ClearAllHighScores();
 
                 UpdateDisplay("All high scores cleared from database");
             }
